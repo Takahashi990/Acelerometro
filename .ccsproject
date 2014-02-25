@@ -9,4 +9,5 @@
 	<linkerCommandFile value="lnk_msp430f2274.cmd"/>
 	<rts value="libc.a"/>
 	<templateProperties value="id=com.ti.sdo.grace.example_0,type=rtsc,products=com.ti.sdo.grace;com.ti.mcu.msp430ware,platform=ti.platforms.msp430:$DeviceId$,buildProfile=debug,isHybrid=true,configuroOptions=-Dxdc.cfg.tsort.policy=fast -Dxdc.cfg.gen.metadataFiles=false -Dxdc.cfg.SourceDir.verbose=7 --compileOptions &quot;--symdebug:dwarf --optimize_with_debug&quot;,"/>
+	<isTargetManual value="false"/>
 </projectOptions>
