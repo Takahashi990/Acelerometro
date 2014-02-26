@@ -12,6 +12,7 @@
 
 volatile unsigned int i;
 volatile unsigned char data;
+volatile unsigned int UART_FG;
 
 void inicializa(char address, char data_acc)
 {
@@ -44,7 +45,7 @@ void main(void)
 
 
 	cs_enable1;
-	inicializa( 0x20 , 0xC7 ); //CTRL_REG1
+	inicializa( 0x20 , 0xF7 ); //CTRL_REG1
 	cs_disable1;
 
 	cs_enable1;
@@ -61,51 +62,52 @@ void main(void)
 
 	for( i=30 ; i > 0 ; i--);
 
-	int stop = 0;
-	while ( stop == 0 )
+
+	while ( 1 )
 	{
-		cs_enable1;
-		inicializa( 0xA7 , 0xDB ); //STATUS_REG
-		if( UCB0RXBUF &= BIT7 )							//data overrun test
-			stop = 1;
-		cs_disable1;
+		if( UART_FG == 1 )
+		{
 
-		cs_enable1;
-		inicializa( 0xA8 , 0xDB ); //OUTX_L
-		cs_disable1;
-
-		cs_enable1;
-		inicializa( 0xA9 , 0xDB ); //OUTX_H
-		cs_disable1;
-
-		cs_enable1;
-		inicializa( 0xAA , 0xDB ); //OUTY_L
-		cs_disable1;
-
-		cs_enable1;
-		inicializa( 0xAB , 0xDB ); //OUTY_H
-		cs_disable1;
-
-		cs_enable1;
-		inicializa( 0xAC , 0xDB ); //OUTZ_L
-		cs_disable1;
-
-		cs_enable1;
-		inicializa( 0xAD , 0xDB ); //OUTZ_H
-		cs_disable1;
-
-
-		for( i=50 ; i > 0 ; i--);
-
+		}
 	}
+
 }
 
 
-void acc_isr(void) {
+void acc_isr(void) {	//acc data read spi
 
 	P2IFG &= ~BIT1;
 
-	while (!(IFG2 & UCB0TXIFG));
+/*	cs_enable1;
+	inicializa( 0xA7 , 0xDB ); //STATUS_REG
+	cs_disable1;
+*/
+	cs_enable1;
+	inicializa( 0xA8 , 0xDB ); //OUTX_L
+	cs_disable1;
 
-	//UCB0TXBUF = ;
+	cs_enable1;
+	inicializa( 0xA9 , 0xDB ); //OUTX_H
+	cs_disable1;
+
+	cs_enable1;
+	inicializa( 0xAA , 0xDB ); //OUTY_L
+	cs_disable1;
+
+	cs_enable1;
+	inicializa( 0xAB , 0xDB ); //OUTY_H
+	cs_disable1;
+
+	cs_enable1;
+	inicializa( 0xAC , 0xDB ); //OUTZ_L
+	cs_disable1;
+
+	cs_enable1;
+	inicializa( 0xAD , 0xDB ); //OUTZ_H
+	cs_disable1;
+
+	UART_FG = 1;
 }
+
+
+
