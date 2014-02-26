@@ -61,7 +61,7 @@ void USCI_B0_graceInit(void)
     UCB0CTL1 = UCSSEL_2 | UCSWRST;
     
     /* Bit Rate Control Register 0 */
-    UCB0BR0 = 4;
+    UCB0BR0 = 1;
     
     /* Enable USCI */
     UCB0CTL1 &= ~UCSWRST;

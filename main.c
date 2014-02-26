@@ -42,26 +42,61 @@ void main(void)
 	P2OUT |= BIT0;
 	for (i = 30000; i; i--);
 
-	while (1)
+
+	cs_enable1;
+	inicializa( 0x20 , 0xC7 ); //CTRL_REG1
+	cs_disable1;
+
+	cs_enable1;
+	inicializa( 0xA0 , 0xDB );
+	cs_disable1;
+
+	cs_enable1;
+	inicializa( 0x21 , 0x84 ); //CTRL_REG2
+	cs_disable1;
+
+	cs_enable1;
+	inicializa( 0xA1 , 0xDB );
+	cs_disable1;
+
+	for( i=30 ; i > 0 ; i--);
+
+	int stop = 0;
+	while ( stop == 0 )
 	{
+		cs_enable1;
+		inicializa( 0xA7 , 0xDB ); //STATUS_REG
+		if( UCB0RXBUF &= BIT7 )							//data overrun test
+			stop = 1;
+		cs_disable1;
 
-				cs_enable1;
-				inicializa( 0x20 , 0xC7 ); //turn-on the device and gather acceleration data
-				cs_disable1;
+		cs_enable1;
+		inicializa( 0xA8 , 0xDB ); //OUTX_L
+		cs_disable1;
 
-				cs_enable1;
-				inicializa( 0xA0 , 0xDB );
-				cs_disable1;
+		cs_enable1;
+		inicializa( 0xA9 , 0xDB ); //OUTX_H
+		cs_disable1;
 
-				cs_enable1;
-				inicializa( 0x21 , 0x84 );
-				cs_disable1;
+		cs_enable1;
+		inicializa( 0xAA , 0xDB ); //OUTY_L
+		cs_disable1;
 
-				cs_enable1;
-				inicializa( 0xA1 , 0xDB );
-				cs_disable1;
+		cs_enable1;
+		inicializa( 0xAB , 0xDB ); //OUTY_H
+		cs_disable1;
 
-				for (i = 300; i; i--);
+		cs_enable1;
+		inicializa( 0xAC , 0xDB ); //OUTZ_L
+		cs_disable1;
+
+		cs_enable1;
+		inicializa( 0xAD , 0xDB ); //OUTZ_H
+		cs_disable1;
+
+
+		for( i=50 ; i > 0 ; i--);
+
 	}
 }
 
