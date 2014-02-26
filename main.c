@@ -61,7 +61,7 @@ void main(void)
 				inicializa( 0xA1 , 0xDB );
 				cs_disable1;
 
-				for (i = 300; i; i--);
+				for (i = 30; i; i--);
 	}
 }
 
