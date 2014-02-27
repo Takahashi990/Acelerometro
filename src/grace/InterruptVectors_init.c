@@ -54,97 +54,22 @@ void InterruptVectors_graceInit(void)
 __interrupt void PORT2_ISR_HOOK(void)
 {
     /* USER CODE START (section: PORT2_ISR_HOOK) */
-    /* replace this comment with your code */
+	acc_isr();
     /* USER CODE END (section: PORT2_ISR_HOOK) */
-}
-
-/*
- *  ======== USCI A0/B0 TX Interrupt Handler Generation ========
- *
- * Here are several important notes on using USCI_A0/B0 TX interrupt Handler:
- * 1. User could use the following code as a template to service the interrupt
- *    handler. Just simply copy and paste it into your user definable code
- *    section.
- *  For UART and SPI configuration:
-
-    if (IFG2 & UCA0TXIFG) {
-
-    }
-    else if (IFG2 & UCB0TXIFG) {
-
-    }
-
- *  For I2C configuration:
-    if (IFG2 & UCA0/B0TXIFG) {
-
-    }
-    else if (IFG2 & UCA0/B0RXIFG) {
-
-    }
-
-
- * 2. User could also exit from low power mode and continue with main
- *    program execution by using the following instruction before exiting
- *    this interrupt handler.
- *
- *    __bic_SR_register_on_exit(LPMx_bits);
- */
-#pragma vector=USCIAB0TX_VECTOR
-__interrupt void USCI0TX_ISR_HOOK(void)
-{
-    /* USER CODE START (section: USCI0TX_ISR_HOOK) */
-    /* replace this comment with your code */
-    /* USER CODE END (section: USCI0TX_ISR_HOOK) */
-}
-
-/*
- *  ======== USCI A0/B0 RX Interrupt Handler Generation ========
- *
- * Here are several important notes on using USCI_A0/B0 RX interrupt Handler:
- * 1. User could use the following code as a template to service the interrupt
- *    handler. Just simply copy and paste it into your user definable code
- *    section.
- *  For UART and SPI configuration:
-
-    if (IFG2 & UCA0RXIFG) {
-
-    }
-    else if (IFG2 & UCB0RXIFG) {
-
-    }
-
-*  For I2C configuration:
-    if (UCB0STAT & UCSTTIFG) {
-
-    }
-    else if (UCB0STAT & UCSTPIFG) {
-
-    }
-    else if (UCB0STAT & UCNACKIFG) {
-
-    }
-    else if (UCB0STAT & UCALIFG) {
-
-    }
-
- * 2. User could also exit from low power mode and continue with main
- *    program execution by using the following instruction before exiting
- *    this interrupt handler.
- *
- *    __bic_SR_register_on_exit(LPMx_bits);
- */
-#pragma vector=USCIAB0RX_VECTOR
-__interrupt void USCI0RX_ISR_HOOK(void)
-{
-    /* USER CODE START (section: USCI0RX_ISR_HOOK) */
-    /* replace this comment with your code */
-    /* USER CODE END (section: USCI0RX_ISR_HOOK) */
 }
 /*
  * ======== Preserved user code snippets ========
  */
 #if 0
-    /* USER CODE START (section: PORT1_ISR_HOOK) */
+    /* USER CODE START (section: USCI0RX_ISR_HOOK) */
+//	acc_isr();
+    /* USER CODE END (section: USCI0RX_ISR_HOOK) */
+
+/* USER CODE START (section: USCI0TX_ISR_HOOK) */
+    /* replace this comment with your code */
+    /* USER CODE END (section: USCI0TX_ISR_HOOK) */
+
+/* USER CODE START (section: PORT1_ISR_HOOK) */
     /* replace this comment with your code */
     /* USER CODE END (section: PORT1_ISR_HOOK) */
 #endif

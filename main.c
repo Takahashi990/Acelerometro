@@ -12,7 +12,6 @@
 
 volatile unsigned int i;
 volatile unsigned char data;
-volatile unsigned int UART_FG;
 
 void inicializa(char address, char data_acc)
 {
@@ -63,18 +62,11 @@ void main(void)
 	for( i=30 ; i > 0 ; i--);
 
 
-	while ( 1 )
-	{
-		if( UART_FG == 1 )
-		{
-
-		}
-	}
-
+	while ( 1 );
 }
 
 
-void acc_isr(void) {	//acc data read spi
+void acc_isr(void) {
 
 	P2IFG &= ~BIT1;
 
@@ -84,29 +76,40 @@ void acc_isr(void) {	//acc data read spi
 */
 	cs_enable1;
 	inicializa( 0xA8 , 0xDB ); //OUTX_L
+	while (!(IFG2 & UCA0TXIFG));
+		UCA0TXBUF = UCB0RXBUF;
 	cs_disable1;
 
 	cs_enable1;
 	inicializa( 0xA9 , 0xDB ); //OUTX_H
+	while (!(IFG2 & UCA0TXIFG));
+		UCA0TXBUF = UCB0RXBUF;
 	cs_disable1;
 
 	cs_enable1;
 	inicializa( 0xAA , 0xDB ); //OUTY_L
+	while (!(IFG2 & UCA0TXIFG));
+		UCA0TXBUF = UCB0RXBUF;
 	cs_disable1;
 
 	cs_enable1;
 	inicializa( 0xAB , 0xDB ); //OUTY_H
+	while (!(IFG2 & UCA0TXIFG));
+		UCA0TXBUF = UCB0RXBUF;
 	cs_disable1;
 
 	cs_enable1;
 	inicializa( 0xAC , 0xDB ); //OUTZ_L
+	while (!(IFG2 & UCA0TXIFG));
+		UCA0TXBUF = UCB0RXBUF;
 	cs_disable1;
 
 	cs_enable1;
 	inicializa( 0xAD , 0xDB ); //OUTZ_H
+	while (!(IFG2 & UCA0TXIFG));
+		UCA0TXBUF = UCB0RXBUF;
 	cs_disable1;
 
-	UART_FG = 1;
 }
 
 
