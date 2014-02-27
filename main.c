@@ -26,12 +26,14 @@ void inicializa(char address, char data_acc)
 	data = UCB0RXBUF;
 }
 
+
 void cs_enable(void)
 {
 	P2OUT |= BIT0;
 	for (i = 100; i; i--);
 	P2OUT &= ~BIT0;
 }
+
 
 
 //  ======== main ========
@@ -52,6 +54,7 @@ void main(void)
 	while (1)
 	{
 
+
 				P2OUT &= ~BIT0;
 
 				inicializa( 0x20 , 0xC7 ); //turn-on the device and gather acceleration data
@@ -71,6 +74,23 @@ void main(void)
 				inicializa( 0xA1 , 0xDB );
 
 				P2OUT |= BIT0;
+
+				cs_enable1;
+				inicializa( 0x20 , 0xC7 ); //turn-on the device and gather acceleration data
+				cs_disable1;
+
+				cs_enable1;
+				inicializa( 0xA0 , 0xDB );
+				cs_disable1;
+
+				cs_enable1;
+				inicializa( 0x21 , 0x84 );
+				cs_disable1;
+
+				cs_enable1;
+				inicializa( 0xA1 , 0xDB );
+				cs_disable1;
+
 
 				for (i = 300; i; i--);
 	}
